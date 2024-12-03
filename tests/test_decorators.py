@@ -1,18 +1,23 @@
-import pytest
 from decorators import log
 
-def add_numbers(x,y):
+
+@log()
+def add_numbers(x, y):
+    """функция для теста"""
     return x + y
 
 
-def test_log(capsys):
-    @log()
-        add_numbers(3,5)
-        captured = capsys.readouterr()
-        assert captured.out == 8
-
-
-result = add_numbers(3,5)
+result = add_numbers(3, 5)
 assert result == 8
 
 
+@log()
+def hello_world():
+    """функция для теста"""
+    print("Hello, world!")
+
+
+def test_hello_world(capsys):
+    hello_world()
+    captured = capsys.readouterr()
+    assert captured.out == 'Hello, world!\nhello_world все ок \nРезультат: None\n'
