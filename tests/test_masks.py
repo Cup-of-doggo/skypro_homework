@@ -1,5 +1,4 @@
 import pytest
-
 from src.masks import get_mask_card_number, get_mask_account
 
 
@@ -16,12 +15,3 @@ def test_mask_card(string, expected_result):
 
 def test_mask_acc():
     assert get_mask_account('Счет 64686473678894779589') == 'Счет **9589'
-
-
-
-
-
-
-
-
-
