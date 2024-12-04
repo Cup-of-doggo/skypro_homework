@@ -8,16 +8,13 @@ def log(filename=None):
         @wraps(func)
         def wrapper(*args, **kwargs):
             try:
-
+                result = func(*args, **kwargs)
                 if filename is None:
-                    result = func(*args, **kwargs)
                     print(f'{func.__name__} все ок \nРезультат: {result}')
-                    return result
                 elif filename is not None:
-                    result = func(args, kwargs)
                     with open(os.path.abspath(filename), "a", encoding="utf-8") as file:
                         file.write(f'{func.__name__} все ок \nРезультат: {result}')
-                        return result
+                return result
 
             except Exception as err:
 
