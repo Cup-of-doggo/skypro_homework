@@ -9,6 +9,7 @@ def log(filename=None):
         def wrapper(*args, **kwargs):
             try:
                 result = func(*args, **kwargs)
+
                 if filename is None:
                     print(f'{func.__name__} все ок \nРезультат: {result}')
                 elif filename is not None:
