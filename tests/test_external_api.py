@@ -17,6 +17,7 @@ transactions = [{
     "to": "Счет 35383033474447895560"
   }]
 
+
 @patch('requests.get')
 def test_convert(mock_get):
     mock_get.return_value.json.return_value = 817368.61
