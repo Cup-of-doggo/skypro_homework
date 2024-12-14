@@ -17,12 +17,11 @@ logger.addHandler(file_handler)
 def get_json_data(file_path=None) -> any:
     """возвращает список словарей из json файла"""
     try:
-        if file_path is None:
-            file_path = os.path.join(os.path.dirname(__file__), "data", "operations.json")
-            logger.info('превращаем json файл в python обьект')
-            with open(file_path, 'r', encoding="utf-8") as f:
-                transactions = json.load(f)
-                return transactions
+        file_path = os.path.join(os.path.dirname(__file__), "data", "operations.json")
+        logger.info('превращаем json файл в python обьект')
+        with open(file_path, 'r', encoding="utf-8") as f:
+            transactions = json.load(f)
+            return transactions
     except Exception as err:
         logger.error(f'Произошла ошибка {err}')
         return f'Произошла ошибка {err}'
