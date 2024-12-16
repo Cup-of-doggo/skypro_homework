@@ -1,7 +1,7 @@
 from unittest.mock import patch
 from src.external_api import convert
 
-transactions = [{
+trans = [{
     "id": 41428829,
     "state": "EXECUTED",
     "date": "2019-07-03T18:35:29.512364",
@@ -9,7 +9,7 @@ transactions = [{
       "amount": "8221.37",
       "currency": {
         "name": "USD",
-        "code": "USD"
+        "code": "RUB"
       }
     },
     "description": "Перевод организации",
@@ -18,7 +18,7 @@ transactions = [{
   }]
 
 
-@patch('requests.get')
+@patch('requests.request')
 def test_convert(mock_get):
-    mock_get.return_value.json.return_value = 817368.61
-    assert convert(transactions) == 817368.61
+    mock_get.return_value.json.return_value = {'info': {'rate': "8221.37"}}
+    assert convert(trans) == "8221.37"

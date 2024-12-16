@@ -20,14 +20,14 @@ def get_csv_file(file_path = None) -> any:
 def get_excel_file(file_path = None) ->any:
     """возвращает список словарей с транзакциями из excel файла"""
     try:
-        #file_path = os.path.join(os.path.dirname(__file__), "data", "transactions_excel.xlsx")
-        #with open(file_path, 'r',encoding="utf-8") as file:
-        transactions_reader = pd.read_excel(r"C:\Users\gorde\PycharmProjects\project_bank\project\src\data\transactions_excel.xlsx")
-        transactions = []
-        for transaction in transactions_reader:
-            transactions.append(transaction)
-        return transactions
+        if file_path is None:
+            filepath = (r"C:\Users\gorde\PycharmProjects\project_bank"
+                       r"\project\src\data\transactions_excel.xlsx")
+            transactions = pd.read_excel(filepath)
+            return transactions
+        else:
+            filepath = file_path
+            transactions = pd.read_excel(filepath)
+            return transactions
     except Exception as err:
         return f'Произошла ошибка:{err}'
-
-print(get_excel_file())
