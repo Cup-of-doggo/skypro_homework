@@ -1,7 +1,7 @@
 import re
 
 
-def find_operation(dicts: list[dict], search_string: any = input()) -> list[dict]:
+def find_operation(dicts: list[dict], search_string: any = None) -> list[dict]:
     """ищет операцию и возвращает список операций где строка есть"""
     founded_string =[]
     for some_dict in dicts:
