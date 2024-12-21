@@ -6,7 +6,8 @@ from src.utils import get_json_data
 from src.widget import get_date, mask_account_card
 
 
-def main():
+def main() -> any:
+    """основная функция отвечающая за логику проекта"""
     print('Привет! Добро пожаловать в программу работы с банковскими транзакциями. ')
     while True:
         print('Выберите необходимый пункт меню:')
@@ -95,7 +96,8 @@ def main():
         user_choose_word_filter = input().lower()
 
         if user_choose_word_filter == 'да' or 'yes':
-            find_operation(transaction_dict, search_string=user_choose_word_filter)
+            print('Введите слово')
+            transaction_dict = find_operation(transaction_dict, search_string=input())
             break
         elif user_choose_word_filter == 'нет' or 'no':
             break
@@ -105,23 +107,20 @@ def main():
 
     print('Распечатываю итоговый список транзакций...')
     if len(transaction_dict) == 0:
-        print('операции удовлетворяющие условия филтрации не найдены')
+        print('Не найдено ни одной транзакции, подходящей под ваши'
+              'условия фильтрации')
     elif len(transaction_dict) > 0:
 
         print(f'Всего банковских операций в выборке:{len(transaction_dict)}')
         if user_choose_extension == "1":
             for transaction in transaction_dict:
                 if transaction.get("description") == "Открытие вклада":
-                    print(f"{get_date(transaction["date"]) or 'дата не указана'} {transaction.get("description")}\n"
+                    print(f"{get_date(transaction)} {transaction.get("description")}\n"
                           f"{mask_account_card(transaction.get("to"))}\nСумма: {transaction.get("operationAmount")["amount"]} "
                           f"{transaction.get("operationAmount")["currency"]["name"]}")
 
                 else:
-                    if transaction["date"] == True:
-                        print(f"{get_date(transaction["date"])}")
-                    else:
-                        print('дата не указана')
-                    print(f"{transaction.get("description")}\n"
+                    print(f"{get_date(transaction)}{transaction.get("description")}\n"
                           f"{mask_account_card(transaction.get("from"))} -> {mask_account_card(transaction.get("to"))}\n"
                           f"Сумма: {transaction.get("operationAmount")["amount"]} "
                           f"{transaction.get("operationAmount")["currency"]["name"]}")
@@ -131,18 +130,11 @@ def main():
                 if transaction.get("currency_name") == 'Rub':
                     transaction["currency_name"] = "руб."
                 if transaction.get("description") == "Открытие вклада":
-                    print(f"{get_date(transaction["date"])} {transaction.get("description")}\n"
+                    print(f"{get_date(transaction)} {transaction.get("description")}\n"
                           f"{mask_account_card(transaction.get("to"))}\nСумма: {transaction.get("amount")} "
                           f"{transaction["currency_name"]}")
 
                 else:
-                    print(f"{get_date(transaction["date"])} {transaction.get("description")}\n"
+                    print(f"{get_date(transaction)} {transaction.get("description")}\n"
                           f"{mask_account_card(transaction.get("from"))} -> {mask_account_card(transaction.get("to"))}\n"
                           f"Сумма: {transaction.get("amount")} {transaction.get("currency_name")}")
-
-
-
-
-
-
-main()

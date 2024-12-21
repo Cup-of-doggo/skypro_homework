@@ -22,11 +22,11 @@ def get_excel_file(file_path=None) -> any:
     try:
         if file_path is None:
             filepath = (r"C:\Users\gorde\PycharmProjects\project_bank\project\src\data\transactions_excel.xlsx")
-            transactions = pd.read_excel(filepath)
+            transactions = pd.read_excel(filepath).to_dict('records')
             return transactions
         else:
             filepath = file_path
-            transactions = pd.read_excel(filepath)
+            transactions = pd.read_excel(filepath).to_dict('records')
             return transactions
     except Exception as err:
         return f'Произошла ошибка:{err}'

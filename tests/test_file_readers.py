@@ -1,4 +1,5 @@
 from unittest.mock import patch
+
 from src.file_readers import get_csv_file, get_excel_file
 
 
@@ -10,5 +11,5 @@ def test_get_csv_file(mock_read):
 
 @patch('pandas.read_excel')
 def test_get_excel_file(mock_read):
-    mock_read.return_value = []
-    assert get_excel_file() == []
+    mock_read.return_value.to_dict.return_value = mock_read
+    assert get_excel_file() == mock_read
