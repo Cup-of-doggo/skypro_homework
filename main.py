@@ -135,18 +135,18 @@ def main() -> any:
 
         else:
             for transaction in transaction_dict:
-                if transaction.get("operationAmount")["currency"]["name"] == 'RUB':
-                    transaction.get("operationAmount")["currency"]["name"] = "руб."
+                if transaction["operationAmount"]["currency"]["name"] == 'RUB':
+                    transaction["operationAmount"]["currency"]["name"] = "руб."
                 if transaction.get("description") == "Открытие вклада":
                     print(f'{get_date(transaction)} {transaction.get("description")}\n'
-                          f'{mask_account_card(transaction.get("to"))}\nСумма: {transaction.get("amount")} '
-                          f'{transaction("operationAmount")["currency"]["name"]}')
+                          f'{mask_account_card(transaction.get("to"))}'
+                          f'\nСумма: {transaction["operationAmount"]["amount"]} '
+                          f'{transaction["operationAmount"]["currency"]["name"]}')
 
                 else:
                     print(f'{get_date(transaction)} {transaction.get("description")}\n'
                           f'{mask_account_card(transaction.get("from"))} -> '
                           f'{mask_account_card(transaction.get("to"))}\n'
-                          f'Сумма: {transaction.get("operationAmount")["amount"]}'
-                          f' {transaction.get("operationAmount")["currency"]["name"]}')
+                          f'Сумма: {transaction["operationAmount"]["amount"]}'
+                          f' {transaction["operationAmount"]["currency"]["name"]}')
 
-main()
