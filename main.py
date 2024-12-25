@@ -15,7 +15,7 @@ def main() -> any:
           '\n2. Получить информацию о транзакциях из CSV-файла'
           '\n3. Получить информацию о транзакциях из XLSX-файла')
 
-        user_choose_extension = str(input())
+        user_choose_extension = input()
 
         if user_choose_extension == "1":
             print('Для обработки выбран JSON-файл.')
@@ -39,7 +39,7 @@ def main() -> any:
         print('Введите статус, по которому необходимо выполнить фильтрацию.'
            'Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING')
 
-        user_choose_filter = str(input().upper())
+        user_choose_filter = input().upper()
 
         if user_choose_filter == "EXECUTED" or user_choose_filter == 'CANCELED' or user_choose_filter == 'PENDING':
             print(f'Операции отфильтрованы по статусу {user_choose_filter}')
@@ -52,13 +52,13 @@ def main() -> any:
     while True:
         print('Отсортировать операции по дате? Да/Нет')
 
-        user_choose_sort_date = str(input().lower())
+        user_choose_sort_date = input().lower()
 
         if user_choose_sort_date == "да" or 'yes':
              while True:
                  print('Отсортировать по возрастанию или по убыванию? ')
 
-                 user_choose_sort = str(input().lower())
+                 user_choose_sort = input().lower()
 
                  if 'возраст' in user_choose_sort:
                      sorted_transaction_dict = sort_by_date(filtred_transaction_dict,sort_order=False)
@@ -79,7 +79,7 @@ def main() -> any:
     while True:
         print('Выводить только рублевые тразакции? Да/Нет')
 
-        user_choose_rub =str(input().lower())
+        user_choose_rub = input().lower()
 
         if user_choose_rub == 'да' or 'yes':
             sort_filtred_transaction_dict = filter_by_currency(sorted_transaction_dict,"RUB")
@@ -97,15 +97,14 @@ def main() -> any:
 
         user_choose_word_filter = input().lower()
 
-        if user_choose_word_filter == 'нет' or 'no':
+        if user_choose_word_filter == 'да' or 'yes':
+            print('Введите слово')
+            search_word = input()
+            word_filtred_transaction_dict = find_operation(transaction_dict, search_string=search_word)
+            break
+        elif user_choose_word_filter == 'нет' or 'no':
             word_filtred_transaction_dict = sort_filtred_transaction_dict
             break
-
-        elif user_choose_word_filter == 'да' or 'yes':
-            print('Введите слово')
-            word_filtred_transaction_dict = find_operation(transaction_dict, search_string=input())
-            break
-
         else:
             print('Ответ введен некоректно')
             continue
@@ -149,4 +148,3 @@ def main() -> any:
                           f'{mask_account_card(transaction.get("to"))}\n'
                           f'Сумма: {transaction["operationAmount"]["amount"]}'
                           f' {transaction["operationAmount"]["currency"]["name"]}')
-
