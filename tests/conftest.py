@@ -8,8 +8,31 @@ def test_filter_card():
 
 @pytest.fixture
 def test_sort_card():
-    return [{'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'},
-            {'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'}
+    return [{
+    "id": 172864002,
+    "state": "EXECUTED",
+    "date": "2018-12-28T23:10:35.459698",
+    "operationAmount": {
+      "amount": "49192.52",
+      "currency": {
+        "name": "USD",
+        "code": "USD"
+      }
+    },
+    "description": "Открытие вклада",
+    "to": "Счет 96231448929365202391"
+  },
+  {
+    "id": 476991061,
+    "state": "CANCELED",
+    "date": "2018-11-23T17:47:33.127140",
+    "operationAmount": {
+      "amount": "26971.25",
+      "currency": {
+        "name": "руб.",
+        "code": "RUB"
+      }
+    }}
             ]
 
 

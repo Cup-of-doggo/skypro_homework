@@ -1,6 +1,7 @@
-from src.generators import filter_by_currency
-from src.generators  import transaction_descriptions
-from src.generators  import card_number_generator
+from src.generators import filter_by_currency, transaction_descriptions
+from src.generators import card_number_generator
+
+
 def test_filter_by_currency(test_filter_by_currency_list):
     assert list(filter_by_currency([
         {
@@ -158,11 +159,8 @@ def test_transaction_descriptions():
             "from": "Visa Platinum 1246377376343588",
             "to": "Счет 14211924144426031657"
         }
-    ])) ==['Перевод организации',
- 'Перевод со счета на счет',
- 'Перевод со счета на счет',
- 'Перевод с карты на карту',
- 'Перевод организации']
+    ])) == ['Перевод организации', 'Перевод со счета на счет',
+'Перевод со счета на счет', 'Перевод с карты на карту', 'Перевод организации']
 
 
 def test_card_number_generator():
